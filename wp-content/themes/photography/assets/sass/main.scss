@@ -1,0 +1,55 @@
+// project variables
+@import 'variables';
+
+// global styles
+@import 'global';
+
+// shared components
+@import 'shared/header';
+@import 'shared/navbar';
+@import 'shared/footer';
+@import 'shared/single';
+@import 'shared/archive';
+@import 'shared/sidebar';
+
+// page specific styles
+@import 'pages/index';
+@import 'pages/content';
+@import 'pages/content-image';
+
+@import 'pages/page-about';
+@import 'pages/page-gallery';
+@import 'pages/page-contact';
+
+// other styles
+html,
+body {
+	margin: 0;
+	padding: 0;
+	font: sans-serif;
+
+	/*height: 100%;*/
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	/*font-family: $body-font;*/
+	&.no-scroll{
+		overflow-y: hidden;
+	}
+	overflow-x: hidden;
+
+	font-family: "Playfair Display", serif;
+	background-color: $eclipse;
+}
+
+p {
+	font-family: 'oswald', sans-serif;
+	/*font-family: "Vidaloka", serif;*/
+	/*font-weight: 500;*/
+}
+
+h1, h2, h3, h4, h5, h6, a, p, small {
+	color: $white;
+}

@@ -1,0 +1,142 @@
+//Colors
+$white: #FFF; /* White */
+$black: #000; /* Black */
+$plantation: #443d4c; /*Plantation*/
+$blue: #2F415E; /* Blue */
+$blue2: #2E7DD9; /* Blue2 */
+$darkCharcoal: #333 ; /* Dark charcoal */
+$whiteSmoke: #f5f5f5; /*White smoke*/
+
+$fordCordovan: #222; /* Ford Cordovan */
+$tuna: #495057; /*Tuna*/
+$linkWater: #ced4da; /*Link Water*/
+
+$blackPearl: #141617; /*Black Pearl*/
+$grey: #797979;
+
+$facebook-blue: #3B5998; /* Facebook Blue */
+$twitter-light-blue: #55ACEE; /* Twitter Light blue */
+$linkedin: #007BB5; /* Linkedin Cerulean */
+
+$eclipse: #3c3a3a; /*Eclipse*/
+
+
+
+//Fonts
+
+
+//Variables
+
+
+//Placeholder
+@mixin flexbox() {
+	display: flex;
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+}
+
+@mixin flex() {
+	-webkit-box-flex: 1;
+		-webkit-flex: 1;
+			-ms-flex: 1;
+				flex: 1;
+}
+
+%flex-direction-column {
+	-webkit-flex-direction: column;
+	-ms-flex-direction: column;
+	flex-direction: column;
+}
+
+%align-items-center {
+	 -webkit-align-items: center;
+		  -ms-flex-align: center;
+			 align-items: center;
+}
+
+/*%flex-flow-row-nowrap {
+			flex-flow: row nowrap;
+	-webkit-flex-flow: row nowrap;
+		-ms-flex-flow: row nowrap;
+}
+
+%flex-flow-column-nowrap {
+-webkit-flex-flow: column nowrap;
+	-ms-flex-flow: column nowrap;
+		flex-flow: column nowrap;	
+}
+
+%box-align-end {
+/* Align children to the horizontal center of this box 
+		-moz-box-align: end;
+	 -webkit-box-align: end;
+}
+
+%box-align-center {
+	-moz-box-align: center;
+ -webkit-box-align: center;
+}
+
+%align-items-end {
+	-webkit-align-items: flex-end;
+			  -ms-flex-align: end;
+			align-items: flex-end;
+}
+
+
+
+%pack-center {
+/* Pack children to the bottom of this box 
+		-moz-box-pack: center;
+	 -webkit-box-pack: center;
+		-ms-flex-pack: center;
+}
+*/
+%justify-content-center {
+	-webkit-justify-content: center;
+			justify-content: center;
+}
+
+@mixin transform( $val ) {
+	-webkit-transform: $val;
+	-moz-transform: $val;
+	-ms-transform: $val;
+	-o-transform: $val;
+	transform: $val;
+}
+
+@mixin animate ($attr, $time){
+	-webkit-transition: $attr $time ease-in-out;
+	-moz-transition: $attr $time ease-in-out;
+	-ms-transition: $attr $time ease-in-out;
+	-o-transition: $attr $time ease-in-out;
+	transition: $attr $time ease-in-out;
+}
+
+@mixin animate2 ($attr2, $time2){
+	-webkit-transition: $attr2 $time2 linear;
+	-moz-transition: $attr2 $time2 linear;
+	-ms-transition: $attr2 $time2 linear;
+	-o-transition: $attr2 $time2 linear;
+	transition: $attr2 $time2 linear;
+}
+
+@keyframes spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(-360deg);
+	}
+}
+
+//Media Queries
+$xs: 575px; /*Extra small devices (portrait phones, less than 576px)*/
+
+$sm: 767px; /* Small devices (landscape phones, less than 768px)*/
+
+$md: 991px; /* Medium devices (tablets, less than 992px)*/
+
+$lg: 1199px; /* Large devices (desktops, less than 1200px)*/

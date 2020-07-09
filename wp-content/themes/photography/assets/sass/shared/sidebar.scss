@@ -1,0 +1,68 @@
+/*
+    ===================================
+        SIDEBAR
+    ===================================
+*/
+
+#sidebar {
+	aside {
+		h1 {
+			color: $white;
+		}
+		ul {
+			list-style: none;
+			color: $white;
+			a {
+				color: $white;/*$fordCordovan*/
+				@include animate(all, 1s);/*transition: all 1s ease-in-out;*/
+			}
+		}
+	}
+}
+
+/* Sidebar START */
+#s {
+/*	display: block;
+	width: 100%;*/
+	height: calc(2.25rem + 2px);
+	margin: .75rem 0rem;
+/*	padding-left: 0.75rem;*/
+	font-size: 1rem;
+	line-height: 1.5;
+	color: $tuna;
+	background-color: $white;
+	background-clip: padding-box;
+	border: 1px solid $linkWater;
+	border-radius: .25rem;
+}
+
+.screen-reader-text {
+	display: none;
+}
+
+#searchsubmit {/*submit button*/
+	background-color: $plantation;
+	color: $white;
+	border: 1px solid $blue;
+	border-radius: 5px;
+	padding: 5px 10px;
+	cursor: pointer;
+	text-decoration: none;
+	text-transform: uppercase;
+	text-align: left;
+	letter-spacing: 1px;
+	font-weight: 700;
+}
+
+#searchsubmit:hover {
+	background-color: $white;
+	color: $plantation;
+	transition: background-color .5s ease-in-out;
+
+	-webkit-transition: background-color .5s ease-in-out;
+	-moz-transition: background-color .5s ease-in-out;
+	-ms-transition: background-color .5s ease-in-out;
+	-o-transition: background-color .5s ease-in-out;
+	transition: background-color .5s ease-in-out;
+}
+/* Sidebar END */
