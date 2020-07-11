@@ -5,7 +5,7 @@
 */
 
 /* AJAX LOADING */
-.content-main {
+/*.content-main {*/
 	.photography-posts-container {
 		article {
 			@include animate( all, 320ms );
@@ -52,7 +52,7 @@
 		}
 	}
 
-}
+/*}*/
 
 .spin { /*spin animation from variables.scss*/
 	animation-name: spin;

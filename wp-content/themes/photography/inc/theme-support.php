@@ -253,3 +253,28 @@ add_filter( 'wp_edit_nav_menu_walker', 'megamenu_walkernav', 99 );
 
 /* MEGAMENU CUSTOM FIELDS SECTION END*/
 
+
+
+/*
+	=========================================================
+		FOR THE BUG FIX TO LOAD THE LOCALHOST ON REFRESH  START
+	=========================================================
+*/
+//function used in archive.php
+function photography_grab_current_uri(){
+
+	$http = ( isset( $_SERVER["HTTPS"] ) ? 'https://' : 'http://' );
+
+	//$referer = ( isset($_SERVER["HTTP_REFERER"]) ? rtrim($_SERVER["HTTP_REFERER"], "/") : $http . $_SERVER["HTTP_HOST"] );
+	$referer = $http . $_SERVER["HTTP_HOST"];//$referer update
+
+	$archive_url = $referer . $_SERVER["REQUEST_URI"];  //to remove the last character that is inside the string need to use PHP function r_trim. HTTP_REFERER - request for the server to print http referer for the LOCALHOST.
+
+	return $archive_url;
+}
+
+/*
+	=========================================================
+		FOR THE BUG FIX TO LOAD THE LOCALHOST ON REFRESH END
+	=========================================================
+*/

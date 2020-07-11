@@ -26,16 +26,71 @@ add_action( 'wp_ajax_photography_save_user_contact_form', 'photography_save_cont
 function photography_load_more() {
 
 	$paged = $_POST["page"]+1;
+	$archive = $_POST["archive"];
 
-	$query = new WP_Query( 
-		array(
-			'post_type'		=> 'post',
-			'post_status'	=> 'publish',//publish - avoid to grab and load all other post that is not published. (as an example: draft posts, private posts, posts waiting for a review)
-			'paged'			=> $paged
-		)
+	$args =	array(
+		'post_type'		=> 'post',
+		'post_status'	=> 'publish',//publish - avoid to grab and load all other post that is not published. (as an example: draft posts, private posts, posts waiting for a review)
+		'paged'			=> $paged //$paged is the variable used to update WP_Query and grab the current post
 	);
 
+	//Archive.php START
+	if( $archive != '0' ): //we have different type of pagination in archive than could extend the arguments array to accept another parameter. Another parameter could be injected that could be a category, a tag parameter, author parameter. The archive is passing as an example data-page="/category/updates/".
+	/*$archive != '0' - have to be as a string, not as a integer, because $archive changes between the string and a number that could create some issues and it is not going to work(in portfolio.js it is defined as a string in var archive = that.data('archive'); and as an integer archive=0 if( typeof archive === 'undefined' ){
+		archive = 0;
+	}). */
+			
+		$archVal = explode( '/', $archive );//Need to explode url to split the first section that indicates what type of archive you are looking at(if we are looking at category, a tag or an author). The second parameter - indicates what type of search we have to do(that means if we are in the category, this is the name of a cagery. If we are in a tag than we have a name of the tag.... ).
+		//explode - lets split a string based on a unique parameter. So we need to specify which parameter we whant to use to explode the string. In this case we are using "/" as a First Parameter. Second parameter - variable that we whant to explode.
+
+		$flipped = array_flip($archVal);//OPTIMIZATION 1 in_array(), because in_array puts a very bit load on a network load time
+		
+		//check if in the array there is the value "category". If there a value category we signed a type of "category_name" then retrive the $currKey. So where the "category" and in which key location is(in this case category is in the location 3 of the array) and need to retrive what it is after the "category", because the category is the type and we need the value that is the next number. So we are adding the "category" in array_keys + 1.
+		switch( isset( $flipped ) ):
+			case $flipped["category"]:
+				$type = "category_name";
+				$key = "category";
+				break;
+
+			case $flipped["tag"]:
+				$type = "tag";
+				$key = $type;
+				break;
+
+			case $flipped["author"]:
+				$type = "author";
+				$key = $type;
+				break;
+		endswitch;
+		
+		$currKey = array_keys( $archVal, $key );
+		$nextKey = $currKey[0]+1;
+		$value = $archVal[ $nextKey ];
+			
+		$args[ $type ] = $value;
+
+
+		//check page trail and remove "page" value (as example .../page2/page3)
+		//check if in archive there is something in array that was exploded with the '/' in $archVal.
+		//if( in_array("page", $archVal) )
+		if( isset( $flipped["page"] ) ):
+			$pageVal = explode( 'page', $archive );
+			$page_trail = $pageVal[0];
+		else:
+			$page_trail = $archive;
+		endif;
+
+	else:
+		$page_trail = '/';
+	endif;
+	//Archive.php END
+
+
+	$query = new WP_Query( $args );
+
 	if( $query->have_posts() ):
+
+		echo '<div class="page-limit" data-page="' . $page_trail . 'page/' . $paged . '/">';//index.php file.//data-page="/page/' . $paged . '" - default pagination structure.
 
 		while( $query->have_posts() ): $query->the_post();
 
@@ -43,6 +98,8 @@ function photography_load_more() {
 			//get_post_format() - retrieve the_post_format of the current post that is in the post loop.
 
 		endwhile;
+
+		echo '</div>';
 		
 	endif;
 	
@@ -53,7 +110,22 @@ function photography_load_more() {
 }
 //AJAX LOAD MORE END
 
+function photography_check_paged( $num = null ){//default attribute that has to be declared, because in index.php page-limit class function photography_check_paged() the variable inside the brackets is not declared. Variable $num = null declared not to trigger any error.
+	$output = '';
 
+	if( is_paged() ) {//is_paged() - boolean detection if is there a page and the page is not equal to zero than it will be true.
+		$output = 'page/' . get_query_var( 'paged' ); //And if it is true than $output variable could be updated.
+	}
+
+	if($num == 1){
+		$paged = ( get_query_var( 'paged' ) == 0 ? 1 : get_query_var( 'paged' ) ); //in the inline if statement check if the paged is equal to zero than the result will be 1, otherwise if the paged is not equal to zero it will be equal to paged.
+		//$output = 'page/' . get_query_var( 'paged' ); - this 'paged' value starts at zero and jumps directly to two.
+		return $paged;
+	}else {
+		return $output;
+	}
+
+}//remembers the location of what location the user is currently looking //function echo in index.php
 
 
 function photography_save_contact(){

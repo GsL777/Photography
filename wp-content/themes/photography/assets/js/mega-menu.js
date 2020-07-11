@@ -24,58 +24,106 @@ jQuery(document).ready(function($){
     /* AJAX LOAD MORE START ajax.php, index.php, index.scss*/
     $(document).on('click','.photography-load-more:not(.loading)', function(){//$(document).on('click' - action is activated when photography-load-more doesn't have .loading class applied to it
 
-            var that = $(this); //inside that will be stored .photography-load-more or whatever button is clicked
-            var page = $(this).data('page'); //page - is a name of a data-PAGE in index.php in Load More container.
-            var newPage = page + 1;
-            var ajaxurl = that.data('url'); //url in index.php data-(name), data url.
+        var that = $(this); //inside that will be stored .photography-load-more or whatever button is clicked
+        var page = $(this).data('page'); //page - is a name of a data-PAGE in index.php in Load More container.
+        var newPage = page + 1;
+        var ajaxurl = that.data('url'); //url in index.php data-(name), data url.
+        var archive = that.data('archive');//for archive page archive.php
 
-            //IN JQUERY IF YOU ADD OR REMOVE THE CLASSES DO NOT HAVE TO REMOVE THE DOT (.)
-            //IF YOU ARE SEARCHING FOR A CLASS YOU HAVE TO PUT A DOT (.).
-            that.addClass('loading').find('.text').slideUp(320);
-            that.find('.photography-icon').addClass('spin');
+        //archive page START
+        if( typeof archive === 'undefined' ){//The typeof operator when applied to the jQuery object returns the string "function". Basically that does mean that jQuery is a function.
+            archive = 0;
+        }
+        //archive page END
 
-            $.ajax({
-                url : ajaxurl,
-                type : 'post',// post - the same type that it is seen in a <form> and the post methot in ajax is a default type.
-                //$_POST (post method) - is a method that passes all the variables hidden inside the reload of the page. These methods are not getting printed anywhere.
-                //$_GET (get method) - print the variables inside the url so you will see the variables inside the url. GET method is not safe
-                data : {// data contains all the custom data like the array and we can write in the {} and send to the ajax function
-                    page : page, //First variable - page is the name of the variable
-                    action: 'photography_load_more' //Second variable - action. We are sending a data to a php file and the php file in order to be properly triggered needs an action: to trigger a specific function. So action needs to be identical to the function that we whant to call.
-                    //photography_load_more - function name in ajax.php
+        //IN JQUERY IF YOU ADD OR REMOVE THE CLASSES DO NOT HAVE TO REMOVE THE DOT (.)
+        //IF YOU ARE SEARCHING FOR A CLASS YOU HAVE TO PUT A DOT (.).
+        that.addClass('loading').find('.text').slideUp(320);
+        that.find('.photography-icon').addClass('spin');
 
-                },
-                error : function( response ){
-                    console.log(response);
-                },
-                success : function( response ){
+        $.ajax({
+            url : ajaxurl,
+            type : 'post',// post - the same type that it is seen in a <form> and the post methot in ajax is a default type.
+            //$_POST (post method) - is a method that passes all the variables hidden inside the reload of the page. These methods are not getting printed anywhere.
+            //$_GET (get method) - print the variables inside the url so you will see the variables inside the url. GET method is not safe
+            data : {// data contains all the custom data like the array and we can write in the {} and send to the ajax function
+                page : page, //First variable - page is the name of the variable
+                archive : archive, //Archive variable 
+                action: 'photography_load_more' //Second variable - action. We are sending a data to a php file and the php file in order to be properly triggered needs an action: to trigger a specific function. So action needs to be identical to the function that we whant to call.
+                //photography_load_more - function name in ajax.php
+            },
+            error : function( response ){
+                console.log(response);
+            },
+            success : function( response ){
 
-                if( response == 0 ){//means that we do not have any posts to load
+            if( response == 0 ){//means that we do not have any posts to load
+                
+                $('.photography-posts-container').append( '<div class="text-center"><h3>You reached the end of the line!</h3><p>No more posts to load.</p></div>' );
                     
-                    $('.photography-posts-container').append( '<div class="text-center"><h3>You reached the end of the line!</h3><p>No more posts to load.</p></div>' );
-                        
-                        that.slideUp(320);
+                    that.slideUp(320);
 
-                    } else {
+                } else {
 
-                        setTimeout(function(){
+                    setTimeout(function(){
 
-                            that.data('page', newPage); //newPage -  data page will be updated dynamically by increment +1.
-                            $('.photography-posts-container').append( response );
+                        that.data('page', newPage); //newPage -  data page will be updated dynamically by increment +1.
+                        $('.photography-posts-container').append( response );
 
-                            that.removeClass('loading').find('.text').slideDown(320); //$(this) is changed with variable that.
-                            that.find('.photography-icon').removeClass('spin');
+                        that.removeClass('loading').find('.text').slideDown(320); //$(this) is changed with variable that.
+                        that.find('.photography-icon').removeClass('spin');
 
-                            revealPosts();/*reaveal post in index.scss*/
+                        revealPosts();/*reaveal post in index.scss*/
 
-                        }, 1000);
+                    }, 1000);
 
-                    }
                 }
-            });
+            }
+        });
 
     });
     /* AJAX LOAD MORE END */
+
+    /*VARIABLE DECLARATIONS*/
+    //var carousel = '.portfolio-carousel-thumb';
+    var last_scroll = 0;/*variable used to store everytime it is checked and detect a container and it the value will be updated of the last_scroll to be fixed and not to repeat the same check every time.
+    Variable for the scroll function.
+    */
+
+    /* SCROLL FUNCTIONS for /page/ and LOAD MORE button START*/
+    $(window).scroll( function(){
+
+        var scroll = $(window).scrollTop();
+        //console.log(scroll);
+        /*var last_scroll = 0; in variable declarations section*/
+        if( Math.abs(scroll - last_scroll) > $(window).height()*0.1 ){//abs - absolute. Math.abs - creates mathematical operation to round up a variable inside the (). There would be an integer number with no commas and no dots.
+            last_scroll = scroll;
+
+            $('.page-limit').each(function ( index ){//looping through all the .page-limits containers on scroll
+                if( isVisible( $(this) ) ){//$(this) - refers to the current '.page-limit' container that is looping inside the .each
+                    //console.log('visible'); //function isVisible( element ) - in helper function section.
+
+                    history.replaceState(null, null, $(this).attr("data-page") );/*dynamically replace the url without updating the page. history.replaceState() - built in jquery.
+                    First parameter - array with custom variables, Second parameter - the title of the page as an example "page-2". (In this case need to keep everything dynamic.), Third parameter - url. To access the url in this case - $(this).attr("data-page")*/
+                    return(false);//false - to interupt the execution of a (replaceState) script if it happens the first time
+
+                }
+            });
+
+        }
+
+    });
+
+    function isVisible( element ){
+        var scroll_pos = $(window).scrollTop();
+        var window_height = $(window).height();
+        var el_top = $(element).offset().top;
+        var el_height = $(element).height();
+        var el_bottom = el_top + el_height;
+        return ( ( el_bottom - el_height*0.25 > scroll_pos ) && ( el_top < (scroll_pos+0.5+window_height) ) );
+    }
+    /*SCROLL FUNCTIONS END*/
+    
 
     /* HELPER FUNCTION START reaveal post in index.scss for article animation when pressing load more button*/
     function revealPosts(){

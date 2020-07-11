@@ -69,7 +69,13 @@
 			}
 		}
 	}
-
 	/*SOCIAL ICONS END */
-
+	
+	@media (min-width: $sm){
+		.footer-style {
+			display: flex;
+			justify-content: flex-end;
+		}	
+	}
+	
 }
