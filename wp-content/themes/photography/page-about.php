@@ -13,7 +13,7 @@
 					$args = array(
 							'type'				=> 'post',
 							'order'				=> 'ASC',
-							'category_name'		=> 'about',
+							'category_name'		=> 'About',
 							'posts_per_page'	=> 1
 						);
 
@@ -37,15 +37,13 @@
 							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 
 								<div class="images" style="background-image: url(<?php echo photography_get_attachment(); ?>);"></div><!-- .images -->
-								
-								<?php the_content(); ?>
 
 								<!-- <div class="images" style="background-image: url(<?php echo $urlImg; ?>);"></div><!-- .images -->
 							</div><!-- .col-lg-6 -->
 
 							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 								<div class="entry-content">
-									<?php the_excerpt(); ?>
+									<?php the_content(); ?>
 								</div>
 							</div><!-- .col-lg-6 -->
 

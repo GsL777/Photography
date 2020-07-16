@@ -4,55 +4,45 @@
 	===================================
 */
 
-/* AJAX LOADING */
-/*.content-main {*/
-	.photography-posts-container {
-		article {
-			@include animate( all, 320ms );
-			@include transform( translateY(100px) );
-			opacity: 0;
-			
-			&.reveal {
-				@include transform( translateY(0) );
-				opacity: 1;
-			}
-		}
-	}/*reaveal post in mega-menu.js*/
-
-	.btn-photography-load {
-		display: block;
-		width: 200px;
-		font-size: 30px;
-		margin: 0 auto;
-		cursor: pointer;
-		opacity: .5;
-		@include animate(opacity, 320ms);
-			&:hover,
-			&:focus,
-			&.loading { /*if the .btn-photography-load button has the class .loading applied, it will use the code {} */
-				opacity: 1;
-			}
-			&.loading {
-				cursor: default;
-			}
-		span {
-			display: block;
-			color: $white;
-		}
-
-		.dashicons {
-			display: block;
-			margin: 0 auto;
-			/*width: 30px;
-			height: 25px;
-			padding-top: 12px;
-			.icon-flipped {
-				@include transform(scaleX(-1));
-			}*/
+/* AJAX LOADING START */
+.photography-posts-container {
+	article {
+		@include animate( all, 320ms );
+		@include transform( translateY(100px) );
+		opacity: 0;
+		
+		&.reveal {
+			@include transform( translateY(0) );
+			opacity: 1;
 		}
 	}
+}/*reaveal post in mega-menu.js*/
 
-/*}*/
+.btn-photography-load {
+	display: block;
+	width: 200px;
+	font-size: 30px;
+	margin: 0 auto;
+	cursor: pointer;
+	opacity: .5;
+	@include animate(opacity, 320ms);
+		&:hover,
+		&:focus,
+		&.loading { /*if the .btn-photography-load button has the class .loading applied, it will use the code {} */
+			opacity: 1;
+		}
+		&.loading {
+			cursor: default;
+		}
+	span {
+		display: block;
+		color: $white;
+	}
+	.dashicons {
+		display: block;
+		margin: 0 auto;
+	}
+}
 
 .spin { /*spin animation from variables.scss*/
 	animation-name: spin;
@@ -60,3 +50,4 @@
 	animation-iteration-count: infinite;
 	animation-timing-function: linear;
 }
+/* AJAX LOADING END */

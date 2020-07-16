@@ -45,7 +45,7 @@ get_header(); ?>
 
 
 			<div class="container text-center"><!--  In WP dashboard -> Settings -> Reading -> Set the number of posts -->
-				<a class="btn-photography-load photography-load-more" data-page="<?php echo photography_check_paged(1); ?>" data-url="<?php echo admin_url('admin-ajax.php'); ?>">
+				<a class="btn-photography-load photography-load-more" data-page="<?php echo photography_check_paged(1);//function in ajax.php ?>" data-url="<?php echo admin_url('admin-ajax.php'); ?>">
 					<span class="photography-icon photography-loading dashicons dashicons-image-rotate"></span><!-- Use span inside <a><a/> not to override any classes or not to trigger any error  -->
 					<span class="text">Load More</span><!--  text in mega-menu.js  -->
 				</a>

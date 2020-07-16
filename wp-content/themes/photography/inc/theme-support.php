@@ -250,15 +250,14 @@ function megamenu_walkernav( $walker ){
 
 add_filter( 'wp_edit_nav_menu_walker', 'megamenu_walkernav', 99 );
 
-
 /* MEGAMENU CUSTOM FIELDS SECTION END*/
 
 
 
 /*
-	=========================================================
+	===========================================================
 		FOR THE BUG FIX TO LOAD THE LOCALHOST ON REFRESH  START
-	=========================================================
+	===========================================================
 */
 //function used in archive.php
 function photography_grab_current_uri(){
@@ -277,4 +276,63 @@ function photography_grab_current_uri(){
 	=========================================================
 		FOR THE BUG FIX TO LOAD THE LOCALHOST ON REFRESH END
 	=========================================================
+*/
+
+
+/*
+	===============================
+		SOCIAL SHARE BUTTONS START
+	===============================
+*/
+function social_btn(){
+	// $title = get_the_title();
+	// $permalink = get_permalink();
+
+	//Compose the share links for Facebook, Twitter, LinkedIn, Instagram
+	$facebook = sprintf('https://www.facebook.com/login/');
+	// $facebook = 'https://www.facebook.com/sharer/sharer.php?u=' . $permalink;
+	$twitter = sprintf('https://twitter.com/login?lang=en-gb');
+	$linkedin = sprintf('https://www.linkedin.com/');
+	$instagram = sprintf('https://www.instagram.com/accounts/login/');
+
+	// Wrap the buttons
+	$output = '<div class="socials">';
+		// Add the links inside the wrapper
+		$output .= '<a href="' . $facebook . '" target="_blank" rel="nofollow"><i class="fa fa-facebook fa-2x" aria-hidden="true"></i></a>';
+
+		$output .= '<a href="' . $twitter . '" target="_blank" rel="nofollow"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>';
+
+		$output .= '<a href="' . $linkedin . '" target="_blank" rel="nofollow"><i class="fa fa-linkedin fa-2x" aria-hidden="true"></i></a>';
+
+		$output .= '<a href="' . $instagram . '" target="_blank" rel="nofollow"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a>';
+	$output .= '</div>';
+
+	return $output;
+}
+
+/*
+	===============================
+		SOCIAL SHARE BUTTONS END
+	===============================
+*/
+
+
+
+/*
+	===============================
+		YEAR START
+	===============================
+*/
+
+	function year(){
+		date_default_timezone_set('Europe/Vilnius'); 
+		$this_year = date('Y');
+
+		return $this_year;
+	}
+
+/*
+	===============================
+		YEAR END
+	===============================
 */

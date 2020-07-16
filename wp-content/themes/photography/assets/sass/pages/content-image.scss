@@ -10,13 +10,6 @@
 			}
 		}
 	}
-
-/*	.entry-content {
-		p {
-			color: $white;
-		}
-	}*/
-
 	.thumbnail {
 		@include flexbox();
 		@extend %justify-content-center;
@@ -28,7 +21,6 @@
 			height: 520px;
 		}
 	}
-
 	.wp-block-image {
 		@include flexbox();
 		@extend %justify-content-center;

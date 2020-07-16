@@ -21,7 +21,6 @@ $linkedin: #007BB5; /* Linkedin Cerulean */
 $eclipse: #3c3a3a; /*Eclipse*/
 
 
-
 //Fonts
 
 
@@ -56,44 +55,6 @@ $eclipse: #3c3a3a; /*Eclipse*/
 			 align-items: center;
 }
 
-/*%flex-flow-row-nowrap {
-			flex-flow: row nowrap;
-	-webkit-flex-flow: row nowrap;
-		-ms-flex-flow: row nowrap;
-}
-
-%flex-flow-column-nowrap {
--webkit-flex-flow: column nowrap;
-	-ms-flex-flow: column nowrap;
-		flex-flow: column nowrap;	
-}
-
-%box-align-end {
-/* Align children to the horizontal center of this box 
-		-moz-box-align: end;
-	 -webkit-box-align: end;
-}
-
-%box-align-center {
-	-moz-box-align: center;
- -webkit-box-align: center;
-}
-
-%align-items-end {
-	-webkit-align-items: flex-end;
-			  -ms-flex-align: end;
-			align-items: flex-end;
-}
-
-
-
-%pack-center {
-/* Pack children to the bottom of this box 
-		-moz-box-pack: center;
-	 -webkit-box-pack: center;
-		-ms-flex-pack: center;
-}
-*/
 %justify-content-center {
 	-webkit-justify-content: center;
 			justify-content: center;
@@ -121,6 +82,14 @@ $eclipse: #3c3a3a; /*Eclipse*/
 	-ms-transition: $attr2 $time2 linear;
 	-o-transition: $attr2 $time2 linear;
 	transition: $attr2 $time2 linear;
+}
+
+@mixin animate3 ($attr3, $time3){
+	-webkit-transition: $attr2 $time2 cubic-bezier(0.68, -0.55, 0.265, 1.55);
+	-moz-transition: $attr2 $time2 cubic-bezier(0.68, -0.55, 0.265, 1.55);
+	-ms-transition: $attr2 $time2 cubic-bezier(0.68, -0.55, 0.265, 1.55);
+	-o-transition: $attr2 $time2 cubic-bezier(0.68, -0.55, 0.265, 1.55);
+	transition: $attr2 $time2 cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 @keyframes spin {

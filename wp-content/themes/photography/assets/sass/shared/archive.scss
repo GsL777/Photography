@@ -3,11 +3,9 @@
         ARCHIVE
     ===================================
 */
-
 	.archive-header {
 		width: 100%;
 	}
-
 	.entry-header {
 		small {
 			.post-categories {
@@ -21,7 +19,6 @@
 			}
 		}
 	}
-
 	#sidebar {
 		min-height: 200px;
 		overflow: auto;
@@ -29,7 +26,6 @@
 		position: sticky;
 		top: 5%;
 	}
-
 
 /*
     ===================================
@@ -48,7 +44,6 @@
 			height: 520px;
 		}
 	}
-
 	.wp-block-image {
 		@include flexbox();
 		@extend %justify-content-center;

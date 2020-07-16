@@ -27,7 +27,6 @@ body {
 	margin: 0;
 	padding: 0;
 	font: sans-serif;
-
 	/*height: 100%;*/
 }
 
@@ -39,14 +38,12 @@ body {
 		overflow-y: hidden;
 	}
 	overflow-x: hidden;
-
 	font-family: "Playfair Display", serif;
 	background-color: $eclipse;
 }
 
 p {
-	font-family: 'oswald', sans-serif;
-	/*font-family: "Vidaloka", serif;*/
+	font-family: 'oswald', sans-serif; /*font-family: "Vidaloka", serif;*/
 	/*font-weight: 500;*/
 }
 
